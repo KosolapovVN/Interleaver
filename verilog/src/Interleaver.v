@@ -1,11 +1,12 @@
 // Interleaver for 64 bits = 8 bytes
 // Input data from SPI Interface
+// Uses "SPI_Slave.v" as submodule
 
 module Interleaver
 
 	#(
 	// Parameters
-	parameter SPI_MODE = 1,
+	parameter SPI_MODE 	= 1,
 	parameter DATABYTES = 8
 	)
 
@@ -104,9 +105,9 @@ module Interleaver
 		begin
 			if (r_RX_Frame_Ready)
 			begin
-				o_RX_Frame_Ready <= r_RX_Frame_Ready;
-				o_RX_Bits <= r_RX_Bits; 
-				o_Interleaved_Bits <= {r_RX_Bits[63-53],	r_RX_Bits[63-40],	r_RX_Bits[63-27],	r_RX_Bits[63-14],	
+				o_RX_Frame_Ready 	<= r_RX_Frame_Ready;
+				o_RX_Bits 			<= r_RX_Bits; 
+				o_Interleaved_Bits 	<= {r_RX_Bits[63-53],	r_RX_Bits[63-40],	r_RX_Bits[63-27],	r_RX_Bits[63-14],	
 												r_RX_Bits[63-1],	r_RX_Bits[63-54],	r_RX_Bits[63-50],	r_RX_Bits[63-33],
 												r_RX_Bits[63-15],	r_RX_Bits[63-6], r_RX_Bits[63-56],	r_RX_Bits[63-43],	
 												r_RX_Bits[63-36],	r_RX_Bits[63-17],	r_RX_Bits[63-10],	r_RX_Bits[63-60],

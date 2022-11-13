@@ -108,21 +108,21 @@ module Interleaver
 				o_RX_Frame_Ready 	<= r_RX_Frame_Ready;
 				o_RX_Bits 			<= r_RX_Bits; 
 				o_Interleaved_Bits 	<= {r_RX_Bits[63-53],	r_RX_Bits[63-40],	r_RX_Bits[63-27],	r_RX_Bits[63-14],	
-												r_RX_Bits[63-1],	r_RX_Bits[63-54],	r_RX_Bits[63-50],	r_RX_Bits[63-33],
-												r_RX_Bits[63-15],	r_RX_Bits[63-6], r_RX_Bits[63-56],	r_RX_Bits[63-43],	
-												r_RX_Bits[63-36],	r_RX_Bits[63-17],	r_RX_Bits[63-10],	r_RX_Bits[63-60],
-												r_RX_Bits[63-44],	r_RX_Bits[63-31],	r_RX_Bits[63-21],	r_RX_Bits[63-8],
-												r_RX_Bits[63-55],	r_RX_Bits[63-42],	r_RX_Bits[63-35],	r_RX_Bits[63-16],
-												r_RX_Bits[63-9],	r_RX_Bits[63-58],	r_RX_Bits[63-46],	r_RX_Bits[63-37],
-												r_RX_Bits[63-19],	r_RX_Bits[63-2],	r_RX_Bits[63-51],	r_RX_Bits[63-38],	
-												r_RX_Bits[63-25],	r_RX_Bits[63-12],	r_RX_Bits[63-63],	r_RX_Bits[63-41],
-												r_RX_Bits[63-32],	r_RX_Bits[63-24],	r_RX_Bits[63-7],	r_RX_Bits[63-61],
-												r_RX_Bits[63-48],	r_RX_Bits[63-29],	r_RX_Bits[63-22],	r_RX_Bits[63-3],
-												r_RX_Bits[63-57],	r_RX_Bits[63-47],	r_RX_Bits[63-34],	r_RX_Bits[63-18],	
-												r_RX_Bits[63-5],	r_RX_Bits[63-62],	r_RX_Bits[63-49],	r_RX_Bits[63-30],	
-												r_RX_Bits[63-23],	r_RX_Bits[63-4],	r_RX_Bits[63-59],	r_RX_Bits[63-45],
-												r_RX_Bits[63-28],	r_RX_Bits[63-20],	r_RX_Bits[63-11],	r_RX_Bits[63-52],	
-												r_RX_Bits[63-39],	r_RX_Bits[63-26],	r_RX_Bits[63-13],	r_RX_Bits[63-0]};
+							r_RX_Bits[63-1],	r_RX_Bits[63-54],	r_RX_Bits[63-50],	r_RX_Bits[63-33],
+							r_RX_Bits[63-15],	r_RX_Bits[63-6], r_RX_Bits[63-56],	r_RX_Bits[63-43],	
+							r_RX_Bits[63-36],	r_RX_Bits[63-17],	r_RX_Bits[63-10],	r_RX_Bits[63-60],
+							r_RX_Bits[63-44],	r_RX_Bits[63-31],	r_RX_Bits[63-21],	r_RX_Bits[63-8],
+							r_RX_Bits[63-55],	r_RX_Bits[63-42],	r_RX_Bits[63-35],	r_RX_Bits[63-16],
+							r_RX_Bits[63-9],	r_RX_Bits[63-58],	r_RX_Bits[63-46],	r_RX_Bits[63-37],
+							r_RX_Bits[63-19],	r_RX_Bits[63-2],	r_RX_Bits[63-51],	r_RX_Bits[63-38],	
+							r_RX_Bits[63-25],	r_RX_Bits[63-12],	r_RX_Bits[63-63],	r_RX_Bits[63-41],
+							r_RX_Bits[63-32],	r_RX_Bits[63-24],	r_RX_Bits[63-7],	r_RX_Bits[63-61],
+							r_RX_Bits[63-48],	r_RX_Bits[63-29],	r_RX_Bits[63-22],	r_RX_Bits[63-3],
+							r_RX_Bits[63-57],	r_RX_Bits[63-47],	r_RX_Bits[63-34],	r_RX_Bits[63-18],	
+							r_RX_Bits[63-5],	r_RX_Bits[63-62],	r_RX_Bits[63-49],	r_RX_Bits[63-30],	
+							r_RX_Bits[63-23],	r_RX_Bits[63-4],	r_RX_Bits[63-59],	r_RX_Bits[63-45],
+							r_RX_Bits[63-28],	r_RX_Bits[63-20],	r_RX_Bits[63-11],	r_RX_Bits[63-52],	
+							r_RX_Bits[63-39],	r_RX_Bits[63-26],	r_RX_Bits[63-13],	r_RX_Bits[63-0]};
 			end	
 		end	
 	end

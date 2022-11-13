@@ -1,11 +1,11 @@
 % Algorithm of interleaver
-K = 64;                % number of bits in frame
-bits_pos_in = 1:K;      % bits position before interleaver
+    K = 64;                 % number of bits in frame
+    bits_pos_in = 1:K;      % bits position before interleaver
 
-% vectors p_values and v_values and according to algorithm 
-p_values = [7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 101 103 107 109 113 127 131 137 139 149 151 157 163 167 173 179 181 191 193 197 199 211 223 227 229 233 239 241 251 257];
-v_values = [3 2 2 3 2 5 2 3 2 6 3 5 2 2 2 2 7 5 3 2 3 5 2 5 2 6 3 3 2 3 2 2 6 5 2 5 2 2 2 19 5 2 3 2 3 2 6 3 7 7 6 3];
-value_index = 0;
+% vectors p_values and v_values according to algorithm 
+    p_values = [7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 101 103 107 109 113 127 131 137 139 149 151 157 163 167 173 179 181 191 193 197 199 211 223 227 229 233 239 241 251 257];
+    v_values = [3 2 2 3 2 5 2 3 2 6 3 5 2 2 2 2 7 5 3 2 3 5 2 5 2 6 3 3 2 3 2 2 6 5 2 5 2 2 2 19 5 2 3 2 3 2 6 3 7 7 6 3];
+    value_index = 0;
 
 % Determine number of rows in rectangular matrix and inter-row permutation pattern 
     if K <= 39
@@ -58,18 +58,18 @@ value_index = 0;
     end
     
 % Forming matrix 
-matrixRC = reshape([bits_pos_in,zeros(1,R*C-length(bits_pos_in))],C,R)';  % zeros in the end of last row
-v = v_values(value_index);
+    matrixRC = reshape([bits_pos_in,zeros(1,R*C-length(bits_pos_in))],C,R)';  % zeros in the end of last row
+    v = v_values(value_index);
 
-s = zeros(1,p-1);
-s(1) = 1;
-    
+    s = zeros(1,p-1);
+    s(1) = 1;
+
     for j = 2:length(s)
         s(j) = mod(v*s(j-1),p);
     end
     
-q = zeros(1,R);
-q(1) = 1; 
+    q = zeros(1,R);
+    q(1) = 1; 
     for i = 2:length(q)  
         prime_index = 1;
         while ~(p_values(prime_index) > q(i-1) && gcd(p_values(prime_index),p-1) == 1)
@@ -78,8 +78,8 @@ q(1) = 1;
         q(i) = p_values(prime_index);
     end
         
-r=zeros(size(q));
-r(T+1) = q;
+    r=zeros(size(q));
+    r(T+1) = q;
     for i = 0:(R-1)
         if C == p
             U = [s(mod((0:(p-2))*r(i+1), p-1)+1),0];
@@ -94,40 +94,40 @@ r(T+1) = q;
         matrixRC(i+1,:) = matrixRC(i+1,U+1);    
     end               
     
-matrix_final(:,:) = matrixRC(T+1,:);
-bits_pos_out = reshape(matrix_final, 1, R*C);   % matrix [RxC] to vector
-bits_pos_out = bits_pos_out(bits_pos_out > 0);  % remove zeros
-    
+    matrix_final(:,:) = matrixRC(T+1,:);
+    bits_pos_out = reshape(matrix_final, 1, R*C);   % matrix [RxC] to vector
+    bits_pos_out = bits_pos_out(bits_pos_out > 0);  % remove zeros
+
 % Forming Data for SPI interface
-k_byte = K/8;                       % number of bytes
-data_byte = uint8(1:k_byte);        % vector of bytes from 1 to K/8  
+    k_byte = K/8;                       % number of bytes
+    data_byte = uint8(1:k_byte);        % vector of bytes from 1 to K/8  
 
 % Forming data bit vector from data byte vector
-data_bit = [];                      % empty data bit vector
+    data_bit = [];                      % empty data bit vector
     for ii = 1 : k_byte
         data_bit = [data_bit bitget(data_byte(ii), 8:-1:1)];         % extract bits from byte
     end
 
 % Interleave bits according to rule
     for jj = 1 : K
-        data_bit_interl(jj) = data_bit(bits_pos_out(jj));         % interleave bits
+        data_bit_interl(jj) = data_bit(bits_pos_out(jj));            % interleave bits
     end 
 % Make bits to hex data
-data_interl_resh = reshape(data_bit_interl, [8,K/8]);            % make matrix 8x77
-data_interl_byte = bit2int(data_interl_resh, 8, true);
+    data_interl_resh = reshape(data_bit_interl, [8,K/8]);            % make matrix 8x77
+    data_interl_byte = bit2int(data_interl_resh, 8, true);
 
-data_hex_input  = dec2hex(data_byte);                            % input bytes to interleaver
-data_hex_out    = dec2hex(data_interl_byte);                     % output bytes from interleaver
+    data_hex_input  = dec2hex(data_byte);                            % input bytes to interleaver
+    data_hex_out    = dec2hex(data_interl_byte);                     % output bytes from interleaver
 
-str_in      = join(cellstr(data_hex_input));
-str_out     = join(cellstr(data_hex_out));
+    str_in      = join(cellstr(data_hex_input));
+    str_out     = join(cellstr(data_hex_out));
 
-fid1 = fopen('data_in_hex.dat','w');
-fid2 = fopen('data_out_hex.dat','w');
+    fid1 = fopen('data_in_hex.dat','w');            
+    fid2 = fopen('data_out_hex.dat','w');
 
-fprintf(fid1,'%s ',str_in{1});
-fprintf(fid2,'%s ',str_out{1});
+    fprintf(fid1,'%s ',str_in{1});
+    fprintf(fid2,'%s ',str_out{1});
 
-fclose('all');
+    fclose('all');
 
     
